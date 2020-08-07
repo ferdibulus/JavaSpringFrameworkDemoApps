@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- load file  -->
+	<context:property-placeholder location="sport.properties"/>
+    <!-- Define your beans here -->
+    <bean id="myFortune" 
+    class="com.ferdi.springdemo.HappyFortuneService">
+    </bean>
+    
+    <bean id="myCoach"
+    class = "com.ferdi.springdemo.TrackCoach">
+    	<!-- set up constructer injection -->
+    	<constructor-arg ref="myFortune"></constructor-arg>
+    </bean>
+    
+    <bean id="myCricketCoach"
+    class = "com.ferdi.springdemo.CricketCoach"
+    scope="singleton"
+    >
+    <!-- set up setter injection -->
+    <property name="fortuneService" ref= "myFortune"/> 
+   	
+   	<!--  
+   	<property name="emialAddresse" value= "technocodee@technocodee.com"/>
+    <property name="teamName" value= "Melez"/>
+    -->
+   
+    <property name="emialAddresse" value= "${foo.email}"/>
+    <property name="teamName" value= "${foo.team}"/>
+    
+    </bean>
+    
+  <!--    
+     <bean id="myCoach1"
+    class = "com.ferdi.springdemo.TrackCoach">
+    </bean>
+  --> 
+    
+    <!-- define the dependency -->
+   
+
+</beans>
+
+
+
+
+
